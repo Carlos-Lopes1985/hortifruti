@@ -23,17 +23,19 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
-	private LocalDate dataValidade;
+	private Integer quantidade;
 	private Integer categoria;
+	private Lote lote;
 	
 	private List<EstoqueProduto>itens = new ArrayList<EstoqueProduto>();
 	
-	public Produto(Integer id, String nome, Double preco, Integer categoria) {
+	public Produto(Integer id, String nome, Double preco, Integer quantidade, Integer categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
 		this.categoria = categoria;
+		this.quantidade = quantidade;
 	}
 	
 	public Produto() {
@@ -77,12 +79,6 @@ public class Produto implements Serializable {
 	public void setCategoria(Integer categoria) {
 		this.categoria = categoria;
 	}
-	public LocalDate getDataValidade() {
-		return dataValidade;
-	}
-	public void setDataValidade(LocalDate dataValidade) {
-		this.dataValidade = dataValidade;
-	}
 
 	public List<EstoqueProduto> getItens() {
 		return itens;
@@ -91,4 +87,21 @@ public class Produto implements Serializable {
 	public void setItens(List<EstoqueProduto> itens) {
 		this.itens = itens;
 	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Lote getLote() {
+		return lote;
+	}
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
+	}
+	
 }
