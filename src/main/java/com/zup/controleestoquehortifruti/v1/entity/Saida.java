@@ -2,18 +2,16 @@ package com.zup.controleestoquehortifruti.v1.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Lote implements Serializable {
+public class Saida implements Serializable {
 
 	/**
 	 * 
@@ -24,68 +22,66 @@ public class Lote implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private Integer quantidade;
-	private LocalDate dataValidade;
-	private LocalDate dataEntrada;
+	private LocalDate dataSaida;
 	
-	@OneToMany(mappedBy = "lote",cascade = CascadeType.ALL)
-	private List<Estoque> estoque = new ArrayList<Estoque>();
-
-	public Lote() {
+	@ManyToOne
+	@JoinColumn(name = "estoque_id")
+	private Estoque estoque;
+	
+	public Saida() {
 		super();
 	}
-
-	public Lote(Integer id, Integer quantidade, LocalDate dataValidade, LocalDate dataEntrada) {
+	
+	
+	public Saida(Integer id, Integer quantidade, LocalDate dataSaida, Estoque estoque) {
 		super();
 		this.id = id;
 		this.quantidade = quantidade;
-		this.dataValidade = dataValidade;
-		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.estoque = estoque;
 	}
 
+
+	public Saida(Integer id, Integer quantidade, LocalDate dataSaida) {
+		super();
+		this.id = id;
+		this.quantidade = quantidade;
+		this.dataSaida = dataSaida;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Lote [id=");
+		builder.append("Saida [id=");
 		builder.append(id);
 		builder.append(", quantidade=");
 		builder.append(quantidade);
-		builder.append(", dataValidade=");
-		builder.append(dataValidade);
-		builder.append(", dataEntrada=");
-		builder.append(dataEntrada);
+		builder.append(", dataSaida=");
+		builder.append(dataSaida);
 		builder.append("]");
 		return builder.toString();
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public Integer getQuantidade() {
 		return quantidade;
 	}
-
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
-	public LocalDate getDataValidade() {
-		return dataValidade;
+	public LocalDate getDataSaida() {
+		return dataSaida;
 	}
-
-	public void setDataValidade(LocalDate dataValidade) {
-		this.dataValidade = dataValidade;
+	public void setDataSaida(LocalDate dataSaida) {
+		this.dataSaida = dataSaida;
 	}
-
-	public LocalDate getDataEntrada() {
-		return dataEntrada;
+	public Estoque getEstoque() {
+		return estoque;
 	}
-
-	public void setDataEntrada(LocalDate dataEntrada) {
-		this.dataEntrada = dataEntrada;
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
 	}
 }
